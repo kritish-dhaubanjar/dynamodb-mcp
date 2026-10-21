@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { serveStdio } from "@modelcontextprotocol/server/stdio";
 
-import * as TableTools from "./tools/table.tools";
+import TableTools from "./tools/table.tools";
 
 function createServer() {
   const server = new McpServer({
@@ -9,7 +9,7 @@ function createServer() {
     version: "1.0.0",
   });
 
-  server.registerTool("tables.index", ...TableTools.index());
+  TableTools.register(server);
 
   return server;
 }

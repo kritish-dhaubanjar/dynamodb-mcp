@@ -1,31 +1,53 @@
 import { z } from "zod";
-import { ServerToolOptions } from "./tools";
-import { ServerContext } from "@modelcontextprotocol/server";
+import { McpServer } from "@modelcontextprotocol/server";
 
 import axios from "../config/axios";
 import routes from "../config/routes";
+import { interpolate } from "../utils/string";
 
-export function index() {
-  const config: ServerToolOptions = {
-    title: "List Tables",
-    description: "Get list of all tables",
-    outputSchema: z.array(z.string()),
-    annotations: {
-      readOnlyHint: true,
-    },
-  };
+export default class TableTools {
+  static register(server: McpServer) {
+    server.registerTool(
+      "table.index",
+      {
+        title: "List Tables",
+        description: "Get list of all tables",
+        outputSchema: z.array(z.string()),
+        annotations: {
+          readOnlyHint: true,
+        },
+      },
+      async () => {
+        const url = routes.TABLE.INDEX;
+        const { data } = await axios.get(url);
 
-  const fn = async (
-    _args: Record<string, unknown>,
-    _context: ServerContext,
-  ) => {
-    const { data } = await axios.get(routes.TABLE.INDEX);
+        return {
+          content: [{ type: "text", text: JSON.stringify(data) }],
+          structuredContent: data,
+        };
+      },
+    );
 
-    return {
-      content: [{ type: "text" as const, text: JSON.stringify(data) }],
-      structuredContent: data,
-    };
-  };
+    server.registerTool(
+      "table.describe",
+      {
+        title: "Describe Table",
+        description: "Get description of a table",
+        inputSchema: { tableName: z.string() },
+        annotations: {
+          readOnlyHint: true,
+        },
+      },
+      async ({ tableName }) => {
+        const url = interpolate(routes.TABLE.DESCRIBE, { tableName });
 
-  return [config, fn] as const;
+        const { data } = await axios.get(url);
+
+        return {
+          content: [{ type: "text", text: JSON.stringify(data) }],
+          structuredContent: data,
+        };
+      },
+    );
+  }
 }
