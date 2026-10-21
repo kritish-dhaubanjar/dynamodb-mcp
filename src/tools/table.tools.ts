@@ -49,5 +49,27 @@ export default class TableTools {
         };
       },
     );
+
+    server.registerTool(
+      "table.describeTimeToLive",
+      {
+        title: "Describe Table Time To Live",
+        description: "Get 'Time To Live' description of a table",
+        inputSchema: { tableName: z.string() },
+        annotations: {
+          readOnlyHint: true,
+        },
+      },
+      async ({ tableName }) => {
+        const url = interpolate(routes.TABLE.DESCRIBE_TTL, { tableName });
+
+        const { data } = await axios.get(url);
+
+        return {
+          content: [{ type: "text", text: JSON.stringify(data) }],
+          structuredContent: data,
+        };
+      },
+    );
   }
 }
