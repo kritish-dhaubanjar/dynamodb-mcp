@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc && chmod 755 build/index.js",
+    "format": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
+    "prettier": "3.9.10",
     "typescript": "^7.0.2"
   }
 }
