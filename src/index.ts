@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/server";
 import { serveStdio } from "@modelcontextprotocol/server/stdio";
 
 import TableTools from "./tools/table.tools";
+import ItemTools from "./tools/item.tools";
 
 function createServer() {
   const server = new McpServer({
@@ -10,6 +11,7 @@ function createServer() {
   });
 
   TableTools.register(server);
+  ItemTools.register(server);
 
   return server;
 }
