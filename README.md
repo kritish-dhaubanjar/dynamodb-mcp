@@ -18,30 +18,32 @@ This server connects AI assistants such as Claude to an existing DynamoDB Dashbo
 ## How It Works
 
 ```text
-┌──────────────────┐
-│   Claude Desktop │
-└────────┬─────────┘
+┌───────────────────┐
+│   Claude Desktop  │
+└────────┬──────────┘
          │ MCP (stdio)
          ▼
-┌──────────────────┐
-│  DynamoDB MCP    │
-│     Server       │
-└────────┬─────────┘
+┌───────────────────┐
+│  DynamoDB MCP     │
+│     Server        │
+└────────┬──────────┘
          │ HTTP API
          ▼
-┌──────────────────┐
+┌───────────────────┐
 │ DynamoDB Dashboard│
-└────────┬─────────┘
+└────────┬──────────┘
          │ AWS SDK
          ▼
-┌──────────────────┐
-│     DynamoDB     │
-└──────────────────┘
+┌───────────────────┐
+│     DynamoDB      │
+└───────────────────┘
 ```
 
 The MCP server does not connect directly to AWS DynamoDB. It calls the API exposed by DynamoDB Dashboard, which handles the underlying database connection.
 
 This lets you reuse an existing dashboard configuration for local DynamoDB instances or remote AWS DynamoDB tables.
+
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/477af01b-aae4-43a4-9f37-6c5ce0d3f621" />
 
 ## Available Tools
 
