@@ -33,7 +33,7 @@ export default class TableTools {
       {
         title: "Describe Table",
         description: "Get description of a table",
-        inputSchema: { tableName: z.string() },
+        inputSchema: z.object({ tableName: z.string() }),
         annotations: {
           readOnlyHint: true,
         },
@@ -55,7 +55,7 @@ export default class TableTools {
       {
         title: "Describe Table Time To Live",
         description: "Get 'Time To Live' description of a table",
-        inputSchema: { tableName: z.string() },
+        inputSchema: z.object({ tableName: z.string() }),
         annotations: {
           readOnlyHint: true,
         },
