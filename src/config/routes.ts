@@ -6,5 +6,8 @@ export default {
   },
   ITEM: {
     GET: "/tables/:tableName/items/get",
+    SCAN: "/tables/:tableName/items/scan",
+    QUERY: "/tables/:tableName/items/query",
+    COUNT: "/tables/:tableName/items/count",
   },
 };
