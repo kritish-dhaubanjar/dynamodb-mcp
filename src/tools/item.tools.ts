@@ -59,6 +59,9 @@ export default class ItemTools {
         title: "Scan DynamoDB Table",
         description:
           "Performs a full scan on a DynamoDB table or secondary index to retrieve items, with support for filtering expressions and pagination limits.",
+        annotations: {
+          readOnlyHint: true,
+        },
         inputSchema: z
           .object({
             TableName: z.string().describe("The name of the table to scan."),
@@ -176,6 +179,9 @@ export default class ItemTools {
         title: "Query DynamoDB Table",
         description:
           "Performs a key-based query on a DynamoDB table or secondary index to retrieve items efficiently, with support for key conditions, filtering expressions, and pagination limits.",
+        annotations: {
+          readOnlyHint: true,
+        },
         inputSchema: z.object({
           TableName: z.string().describe("The name of the table to query."),
 
@@ -289,6 +295,9 @@ export default class ItemTools {
         title: "Count DynamoDB Table Items",
         description:
           "Counts the number of items matching specific key conditions or filter expressions in a DynamoDB table or secondary index, without returning the actual item data.",
+        annotations: {
+          readOnlyHint: true,
+        },
         inputSchema: z
           .object({
             TableName: z
